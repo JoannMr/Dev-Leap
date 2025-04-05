@@ -3,7 +3,7 @@
 import { ClerkProvider } from "@clerk/nextjs"; // <-- Importa ClerkProvider
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
 
