@@ -48,7 +48,7 @@ export default function DashboardHeader() {
                 afterSignOutUrl="/"
                 appearance={{
                   elements: {
-                    userButtonAvatarBox: "w-10 h-10",
+                    userButtonAvatarBox: "w-7 h-7",
                   },
                 }}
               />
@@ -56,7 +56,7 @@ export default function DashboardHeader() {
           </div>
 
           {/* Fila 2: Barra de búsqueda (debajo) */}
-          <div className="mt-4 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <SearchBar />
           </div>
         </div>
@@ -104,7 +104,7 @@ export default function DashboardHeader() {
               afterSignOutUrl="/"
               appearance={{
                 elements: {
-                  userButtonAvatarBox: "w-10 h-10",
+                  userButtonAvatarBox: "w-8 h-8",
                 },
               }}
             />
