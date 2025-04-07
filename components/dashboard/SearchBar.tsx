@@ -4,6 +4,8 @@ import React, { useState } from "react";
 export default function SearchBar() {
   // Estado para almacenar el texto que ingresa el usuario
   const [query, setQuery] = useState("");
+  // Estado para controlar el foco del input
+  const [isFocused, setIsFocused] = useState(false);
 
   // Función que se ejecuta al hacer clic en la lupa
   function handleSearch() {
@@ -11,46 +13,66 @@ export default function SearchBar() {
     console.log("Buscando:", query);
   }
 
+  // Función para manejar la tecla Enter
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }
+
   return (
-    <div className="relative w-80">
-      {/* Input redondeado con espacio para el botón de la derecha */}
+    <div className={`relative w-full max-w-xs md:max-w-sm transition-all duration-300 ${isFocused ? 'scale-105' : ''}`}>
+      {/* Icono de búsqueda a la izquierda */}
+
+      {/* Input con diseño minimalista */}
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        onKeyDown={handleKeyDown}
         placeholder="Busca un curso"
         className="
           w-full
-          pr-16            /* Espacio a la derecha para el botón */
-          pl-4 py-2
-          rounded-xl
+          pl-7 pr-12
+          py-2
+          rounded-lg
           border border-gray-200
-          focus:outline-none focus:ring-2 focus:ring-blue-500
+          bg-white
+          text-sm
+          transition-all
+          focus:shadow-sm focus:border-gray-300
+          outline-none
           placeholder:text-gray-400
         "
       />
 
-      {/* Botón con ícono de lupa */}
+      {/* Botón con ícono minimalista */}
       <button
         onClick={handleSearch}
         className="
-          absolute top-0 right-0
-          h-full w-16
+          absolute top-1/2 right-2
+          transform -translate-y-1/2
+          w-8 h-8
           flex items-center justify-center
-          bg-blue-600 text-white
-          rounded-r-xl
-          hover:bg-blue-700
+          text-gray-500
+          hover:text-blue-600
+          transition-colors
           focus:outline-none
+          rounded-full
+          hover:bg-gray-100
         "
+        aria-label="Buscar"
       >
         <svg
-          className="w-5 h-5"
+          className="w-4 h-4"
           fill="none"
           stroke="currentColor"
           strokeWidth={2}
           viewBox="0 0 24 24"
         >
-          <path d="M10 4a6 6 0 014.472 10.112l4.529 4.53a1 1 0 01-1.414 1.414l-4.53-4.529A6 6 0 1110 4z" />
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </button>
     </div>
