@@ -18,6 +18,14 @@ export const GET_COURSES = gql`
         titulo
         slug
       }
+      languages {
+        id
+        name
+        slugLanguage
+        icono {
+          url
+        }
+      }
     }
   }
 `;
@@ -45,6 +53,14 @@ export const GET_COURSE_BY_SLUG = gql`
           url
         }
       }
+      languages {
+        id
+        name
+        slugLanguage
+        icono {
+          url
+        }
+      }
     }
   }
 `;
@@ -61,6 +77,19 @@ export const GET_LESSON_BY_SLUG = gql`
         html
       }
       videoUrl {
+        url
+      }
+    }
+  }
+`;
+
+export const GET_LANGUAGES = gql`
+  query GetLanguages {
+    languages {
+      id
+      name
+      slugLanguage
+      icono {
         url
       }
     }
