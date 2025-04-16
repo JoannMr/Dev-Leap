@@ -79,6 +79,16 @@ export const GET_LESSON_BY_SLUG = gql`
       videoUrl {
         url
       }
+      course {
+        id
+        titulo_Curso
+        slug_curso
+        lessons {
+          id
+          titulo
+          slug
+        }
+      }
     }
   }
 `;
