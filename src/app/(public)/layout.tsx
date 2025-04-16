@@ -15,7 +15,10 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: "DevLeap",
-  description: "Plataforma de cursos",
+  description: "Plataforma de cursos", 
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

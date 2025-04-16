@@ -1,20 +1,20 @@
 // app/page.tsx
 
-import Hero from "@components/home/Hero";
-import CompaniesSection from "@components/home/CompaniesSection";
-import CommunitySection from "@components/home/CommunitySection";
 import PopularCoursesSection from "@components/home/PopularCoursesSection";
-import TeamSection from "@components/home/TeamSection";
+import HeroMotion from "@components/home/HeroMotion";
+import { CompaniesMotion } from "@components/home/CompaniesMotion";
+import { CommunityMotion } from "@components/home/CommunityMotion";
+import TeamMotion from "@components/home/TeamMotion";
 
 export default function Home() {
   return (
     <main>
       {/* Sección Hero */}
-      <Hero />
-      <CompaniesSection />
-      <CommunitySection />
+      <HeroMotion />
+      <CompaniesMotion />
+      <CommunityMotion />
       <PopularCoursesSection />
-      <TeamSection />
+      <TeamMotion />
       {/* Aquí podrías añadir más secciones de tu homepage */}
     </main>
   );
