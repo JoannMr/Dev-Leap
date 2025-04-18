@@ -9,7 +9,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="w-full shadow font-semibold">
+    <header className="w-full shadow font-semibold bg-white">
       {/* Versión móvil */}
       <div className="md:hidden">
         <nav className="container mx-auto px-4 py-4">
