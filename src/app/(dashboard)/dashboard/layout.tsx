@@ -1,8 +1,9 @@
 // app/(dashboard)/dashboard/layout.tsx
 import { ClerkProvider } from "@clerk/nextjs";
 import DashboardHeader from "@components/dashboard/DashboardHeader";
-import DashboardSidebar from "@components/dashboard/DashboardSidebar"; 
+import DashboardSidebar from "@components/dashboard/DashboardSidebar";
 import { SearchProvider } from "@/context/SearchContext";
+import { Toaster } from "sonner";
 import "@/app/globals.css";
 
 export default function DashboardLayout({
@@ -14,6 +15,9 @@ export default function DashboardLayout({
     <html lang="en">
       <ClerkProvider>
         <body className="min-h-screen flex flex-col">
+          {/* Contenedor para los toasts de Sonner */}
+          <Toaster richColors position="top-right" />
+
           <SearchProvider>
             <DashboardHeader />
             <div className="flex flex-1">
