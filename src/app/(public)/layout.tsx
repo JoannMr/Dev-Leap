@@ -31,7 +31,9 @@ export default function RootLayout({
       <ClerkProvider>
         <body className={`${outfit.variable} font-sans`}>
           <Header />
-          {children}
+          <div className="pt-14">
+            {children}
+          </div>
           <Footer />
         </body>
       </ClerkProvider>
