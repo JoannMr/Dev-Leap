@@ -94,7 +94,7 @@ const programas: Programa[] = [
     icon: <TbBrandCSharp size={48} />, 
     nombre: "C#", 
     descripcion: "Lenguaje poderoso para desarrollo de aplicaciones empresariales.",
-    color: "from-purple-500 to-purple-600",
+    color: "from-green-500 to-green-600",
     etiquetas: ["Backend", "Certificado", "Microsoft"] 
   },
   { 
@@ -165,7 +165,7 @@ export default function ProgramGrid() {
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
       >
-        <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text font-semibold text-lg">
+        <span className="bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text font-semibold text-lg">
           NUESTROS PROGRAMAS
         </span>
         <h2 className="text-4xl sm:text-5xl font-bold mt-2 mb-4 text-gray-800">

@@ -1,99 +1,113 @@
 "use client";
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
+// Lista de proyectos destacados
 const proyectos = [
   {
-    img: "/images/aut.jpg",
-    titulo: "Autenticación completa",
-    descripcion: "Implementación de login, registro y recuperación de contraseña con Next.js",
-    etiqueta: "REACT"
+    id: 1,
+    titulo: "E-commerce App",
+    imagen: "/images/project1.webp",
+    categoria: "JavaScript",
+    nivel: "Intermedio"
   },
   {
-    img: "/images/Proyecto-2.png",
-    titulo: "E-commerce responsive",
-    descripcion: "Landing page de tienda online con animaciones avanzadas en CSS",
-    etiqueta: "HTML/CSS"
+    id: 2,
+    titulo: "Admin Dashboard",
+    imagen: "/images/project2.webp",
+    categoria: "React & Tailwind",
+    nivel: "Avanzado"
   },
   {
-    img: "/projects/dashboard-next.jpg",
-    titulo: "Dashboard administrativo",
-    descripcion: "Panel de control con estadísticas en tiempo real y gráficos",
-    etiqueta: "NEXT.JS"
+    id: 3,
+    titulo: "API REST",
+    imagen: "/images/project3.webp",
+    categoria: "Node.js",
+    nivel: "Intermedio"
   },
   {
-    img: "/images/tareas-del-equipo.webp",
-    titulo: "App de gestión de tareas",
-    descripcion: "Aplicación completa con autenticación, base de datos y drag & drop",
-    etiqueta: "FULLSTACK"
+    id: 4,
+    titulo: "Social Network Clone",
+    imagen: "/images/project4.webp",
+    categoria: "Full Stack",
+    nivel: "Avanzado"
   }
 ];
 
 export default function ProjectsGallery() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="py-24 px-6 bg-gray-50">
+    <section className="py-24 px-6 bg-gradient-to-r from-blue-50 to-green-50">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
         >
-          <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text font-semibold text-lg">
+          <span className="bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text font-semibold text-lg">
             PROYECTOS REALES
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-2 mb-4 text-gray-800">
-            Construye tu portafolio
+            Lo que construirás
           </h2>
           <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-            Estos son algunos de los proyectos profesionales que crearás durante tu formación
+            Completa proyectos de nivel profesional que potenciarán tu portafolio
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {proyectos.map((proyecto, index) => (
             <motion.div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden shadow-lg group hover:shadow-xl transition-all duration-300"
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              key={proyecto.id}
+              className="rounded-xl overflow-hidden shadow-lg group bg-white"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              viewport={{ once: true, margin: "-100px" }}
+              whileHover={{ y: -10, transition: { duration: 0.3 } }}
             >
-              <div className="relative h-60 overflow-hidden">
-                {/* Overlay con gradiente */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
-
-                {/* Etiqueta */}
-                <div className="absolute top-4 right-4 z-20">
-                  <span className="bg-white text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">
-                    {proyecto.etiqueta}
-                  </span>
+              <div className="relative h-48 w-full overflow-hidden">
+                <Image
+                  src={proyecto.imagen}
+                  alt={proyecto.titulo}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className="transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
+                <div className="absolute bottom-0 left-0 w-full p-4">
+                  <h3 className="text-white font-bold text-lg">{proyecto.titulo}</h3>
+                  <div className="flex justify-between mt-1">
+                    <span className="text-white/80 text-sm">{proyecto.categoria}</span>
+                    <span className={`text-xs ${
+                      proyecto.nivel === "Avanzado" 
+                        ? "text-green-300" 
+                        : proyecto.nivel === "Intermedio" 
+                          ? "text-blue-300" 
+                          : "text-yellow-300"
+                    }`}>
+                      {proyecto.nivel}
+                    </span>
+                  </div>
                 </div>
-
-                {/* Imagen */}
-                <motion.div
-                  className="w-full h-full" 
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Image
-                    src={proyecto.img}
-                    alt={proyecto.titulo}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    className="group-hover:scale-105 transition-transform duration-700"
-                  />
-                </motion.div>
               </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{proyecto.titulo}</h3>
-                <p className="text-gray-600 mb-4">{proyecto.descripcion}</p>
+              <div className="p-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-600">Incluido en el programa</span>
+                </div>
+                <motion.button 
+                  className="mt-3 w-full py-2 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Ver detalles
+                </motion.button>
               </div>
             </motion.div>
           ))}

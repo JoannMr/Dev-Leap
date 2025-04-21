@@ -54,7 +54,7 @@ export default function Testimonials() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text font-semibold text-lg">
+          <span className="bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text font-semibold text-lg">
             EXPERIENCIAS
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-2 mb-4 text-gray-800">
@@ -80,7 +80,7 @@ export default function Testimonials() {
             }}
           />
           <motion.div
-            className="absolute -bottom-20 -right-20 w-64 h-64 bg-purple-100 rounded-full mix-blend-multiply blur-3xl opacity-30"
+            className="absolute -bottom-20 -right-20 w-64 h-64 bg-green-100 rounded-full mix-blend-multiply blur-3xl opacity-30"
             animate={{ 
               x: [0, -30, 0],
               y: [0, 30, 0],
@@ -92,7 +92,7 @@ export default function Testimonials() {
             }}
           />
 
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-10 shadow-lg relative z-10">
+          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-10 shadow-lg relative z-10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -161,7 +161,7 @@ export default function Testimonials() {
                     key={idx}
                     onClick={() => setCurrentIndex(idx)}
                     className={`w-3 h-3 rounded-full ${
-                      idx === currentIndex ? 'bg-blue-600' : 'bg-gray-300'
+                      idx === currentIndex ? 'bg-green-600' : 'bg-gray-300'
                     }`}
                   />
                 ))}

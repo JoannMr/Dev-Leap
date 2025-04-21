@@ -10,7 +10,7 @@ const beneficios = [
     descripcion: "Estudia cuando y donde quieras, sin horarios fijos"
   },
   {
-    icon: <FaSyncAlt className="text-blue-600 text-4xl" />,
+    icon: <FaSyncAlt className="text-green-600 text-4xl" />,
     titulo: "Contenido actualizado",
     descripcion: "Tecnologías y frameworks actualizados con las últimas versiones"
   },
@@ -20,7 +20,7 @@ const beneficios = [
     descripcion: "Construye un portafolio profesional mientras aprendes"
   },
   {
-    icon: <FaChalkboardTeacher className="text-blue-600 text-4xl" />,
+    icon: <FaChalkboardTeacher className="text-green-600 text-4xl" />,
     titulo: "Tutor personalizado",
     descripcion: "Asistencia directa de expertos en la industria"
   },
@@ -73,7 +73,7 @@ export default function Benefits() {
         }}
       />
       <motion.div 
-        className="absolute bottom-20 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply blur-3xl opacity-30"
+        className="absolute bottom-20 right-0 w-96 h-96 bg-green-100 rounded-full mix-blend-multiply blur-3xl opacity-30"
         animate={{ 
           x: [0, -30, 0],
           y: [0, 30, 0],
@@ -93,7 +93,7 @@ export default function Benefits() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text font-semibold text-lg">
+          <span className="bg-gradient-to-r from-blue-500 to-green-500 text-transparent bg-clip-text font-semibold text-lg">
             CARACTERÍSTICAS DESTACADAS
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold mt-2 mb-4 text-gray-800">
@@ -114,11 +114,11 @@ export default function Benefits() {
           {beneficios.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group"
+              className={`bg-white border border-gray-100 rounded-xl p-6 shadow-sm hover:shadow-md transition-all group ${index % 2 === 0 ? 'hover:border-blue-100' : 'hover:border-green-100'}`}
               variants={itemVariants}
               whileHover={{ y: -10, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.05)" }}
             >
-              <div className="h-14 w-14 rounded-full bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-100 transition-colors">
+              <div className={`h-14 w-14 rounded-full ${index % 2 === 0 ? 'bg-blue-50 group-hover:bg-blue-100' : 'bg-green-50 group-hover:bg-green-100'} flex items-center justify-center mb-6 transition-colors`}>
                 <motion.div
                   whileHover={{ rotate: 10, scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}

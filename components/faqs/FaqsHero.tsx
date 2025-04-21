@@ -11,30 +11,30 @@ export default function FaqsHero() {
     {
       icon: <FiCode size={18} />,
       text: "Cursos 100% gratuitos",
-      color: "from-cyan-400 to-blue-500"
+      color: "from-blue-500 to-green-500"
     },
     {
       icon: <FiBookOpen size={18} />,
       text: "Certificaciones incluidas",
-      color: "from-purple-400 to-indigo-500"
+      color: "from-blue-500 via-green-500 to-blue-500"
     },
     {
       icon: <FiAward size={18} />,
       text: "Proyectos reales",
-      color: "from-pink-400 to-rose-500"
+      color: "from-green-400 via-teal-400 to-blue-500"
     },
     {
       icon: <FiUsers size={18} />,
       text: "Comunidad activa",
-      color: "from-amber-400 to-orange-500"
+      color: "from-blue-500 to-green-500"
     }
   ];
   
   return (
-    <section className="relative bg-gradient-to-b from-indigo-900 to-purple-900 overflow-hidden pt-32 pb-24">
+    <section className="relative bg-gradient-to-b from-blue-900 to-green-900 overflow-hidden pt-32 pb-24">
       {/* Formas decorativas animadas */}
       <motion.div 
-        className="absolute top-20 right-[5%] w-80 h-80 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 blur-[100px] opacity-30"
+        className="absolute top-20 right-[5%] w-80 h-80 rounded-full bg-gradient-to-r from-blue-400 to-green-400 blur-[100px] opacity-30"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.3, 0.5, 0.3]
@@ -46,7 +46,7 @@ export default function FaqsHero() {
         }}
       />
       <motion.div 
-        className="absolute left-[5%] bottom-20 w-64 h-64 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 blur-[80px] opacity-20"
+        className="absolute left-[5%] bottom-20 w-64 h-64 rounded-full bg-gradient-to-r from-green-400 to-blue-400 blur-[80px] opacity-20"
         animate={{
           scale: [1.2, 1, 1.2],
           opacity: [0.2, 0.4, 0.2]
@@ -80,11 +80,11 @@ export default function FaqsHero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white leading-tight">
-              Aprende <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300">gratis</span> con DevLeap
+              Aprende <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500">gratis</span> con DevLeap
             </h1>
             
             <motion.p 
-              className="text-lg md:text-xl text-indigo-100 mb-10 max-w-2xl mx-auto"
+              className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
@@ -130,7 +130,7 @@ export default function FaqsHero() {
             >
               <Link href="/auth/register">
                 <motion.button
-                  className="bg-gradient-to-r from-cyan-500 to-indigo-500 hover:from-cyan-600 hover:to-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all group"
+                  className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all group"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                 >

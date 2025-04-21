@@ -24,7 +24,7 @@ export default function Hero() {
         >
           <source src="/videos/hero2.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-green-900/80 mix-blend-multiply" />
       </div>
 
       <div className="relative z-10 px-6 max-w-5xl mx-auto">
@@ -39,7 +39,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-blue-400 to-green-500 text-transparent bg-clip-text">
               Programa
             </span>{" "}
             tu Futuro
@@ -63,7 +63,7 @@ export default function Hero() {
         >
           <motion.button 
             onClick={scrollToProgramas}
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full text-lg font-semibold hover:shadow-lg hover:from-blue-600 hover:to-purple-700 transition-all"
+            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full text-lg font-semibold hover:shadow-lg hover:from-blue-600 hover:to-green-600 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -133,7 +133,7 @@ export default function Hero() {
         }}
       />
       <motion.div 
-        className="absolute -top-20 -right-20 w-60 h-60 bg-purple-600 rounded-full mix-blend-multiply blur-3xl opacity-30"
+        className="absolute -top-20 -right-20 w-60 h-60 bg-green-600 rounded-full mix-blend-multiply blur-3xl opacity-30"
         animate={{ 
           y: [0, -40, 0],
           opacity: [0.3, 0.6, 0.3]

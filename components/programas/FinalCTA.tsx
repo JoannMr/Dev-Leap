@@ -8,7 +8,7 @@ export default function FinalCTA() {
   return (
     <section className="py-32 relative overflow-hidden">
       {/* Fondo con gradiente y overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-700 z-0">
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-green-500 z-0">
         <div className="absolute inset-0 opacity-20 w-screen h-full overflow-hidden">
           <svg
             width="150%"
@@ -48,7 +48,7 @@ export default function FinalCTA() {
         }}
       />
       <motion.div 
-        className="absolute bottom-10 right-10 w-80 h-80 bg-purple-400 rounded-full mix-blend-multiply blur-[100px] opacity-30"
+        className="absolute bottom-10 right-10 w-80 h-80 bg-green-400 rounded-full mix-blend-multiply blur-[100px] opacity-30"
         animate={{ 
           y: [0, -50, 0],
           scale: [1, 1.1, 1],
@@ -158,7 +158,7 @@ export default function FinalCTA() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="flex items-center">
-                      <div className="mr-4 p-3 bg-purple-500 rounded-full">
+                      <div className="mr-4 p-3 bg-green-500 rounded-full">
                         <FiMessageCircle className="text-white text-lg" />
                       </div>
                       <div>
@@ -193,9 +193,9 @@ export default function FinalCTA() {
                           key={i}
                           className={`w-8 h-8 rounded-full border-2 border-white bg-gradient-to-r ${
                             i === 0 ? "from-blue-400 to-blue-500" :
-                            i === 1 ? "from-purple-400 to-purple-500" :
-                            i === 2 ? "from-pink-400 to-pink-500" :
-                            "from-indigo-400 to-indigo-500"
+                            i === 1 ? "from-green-400 to-green-500" :
+                            i === 2 ? "from-blue-400 to-blue-500" :
+                            "from-green-400 to-green-500"
                           }`}
                           initial={{ opacity: 0, scale: 0.5, x: -10 }}
                           whileInView={{ opacity: 1, scale: 1, x: 0 }}

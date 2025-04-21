@@ -196,7 +196,7 @@ export default function AccordionFaqs() {
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block py-1 px-3 mb-4 text-xs font-semibold text-indigo-600 bg-indigo-100 rounded-full uppercase tracking-wider">
+            <span className="inline-block py-1 px-3 mb-4 text-xs font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-green-500 bg-white border border-blue-200 rounded-full uppercase tracking-wider">
               FAQ
             </span>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
@@ -218,7 +218,7 @@ export default function AccordionFaqs() {
                 onClick={() => changeCategory(cat.id)}
                 className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors ${
                   activeCategory === cat.id
-                    ? 'bg-indigo-600 text-white'
+                    ? 'bg-gradient-to-r from-blue-600 to-green-600 text-white'
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
                 whileHover={{ scale: 1.03 }}
@@ -228,7 +228,7 @@ export default function AccordionFaqs() {
                 {cat.label}
                 {activeCategory === cat.id && (
                   <motion.div
-                    className="absolute inset-0 bg-indigo-600 rounded-lg -z-10"
+                    className="absolute inset-0 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg -z-10"
                     layoutId="activeCategoryBackground"
                   />
                 )}
@@ -258,7 +258,7 @@ export default function AccordionFaqs() {
                   <motion.button
                     className={`w-full text-left p-6 rounded-lg border flex justify-between items-center transition-all ${
                       activeIndex === index 
-                        ? 'bg-indigo-50 border-indigo-200 shadow-md' 
+                        ? 'bg-gradient-to-r from-blue-50 to-green-50 border-blue-200 shadow-md' 
                         : 'bg-white border-gray-200 hover:bg-gray-50'
                     }`}
                     onClick={() => toggleFaq(index)}
@@ -270,7 +270,7 @@ export default function AccordionFaqs() {
                       animate={{ rotate: activeIndex === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
                       className={`flex-shrink-0 w-8 h-8 ml-4 flex items-center justify-center rounded-full ${
-                        activeIndex === index ? 'bg-indigo-500 text-white' : 'bg-gray-200 text-gray-600'
+                        activeIndex === index ? 'bg-gradient-to-r from-blue-500 to-green-500 text-white' : 'bg-gray-200 text-gray-600'
                       }`}
                     >
                       <FiChevronDown />
@@ -312,7 +312,7 @@ export default function AccordionFaqs() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
               href="/auth/register"
-              className="inline-flex items-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 transition-colors"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-green-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-green-700 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -320,11 +320,11 @@ export default function AccordionFaqs() {
             </motion.a>
             <motion.a
               href="/empresas"
-              className="inline-flex items-center gap-2 bg-white border border-indigo-600 text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-indigo-50 transition-colors"
+              className="inline-flex items-center gap-2 bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
-              <FiMessageCircle className="text-indigo-600" />
+              <FiMessageCircle className="text-blue-600" />
               Servicios para empresas
             </motion.a>
           </div>
