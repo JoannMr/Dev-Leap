@@ -33,10 +33,11 @@ export async function POST(req: Request) {
     console.log("✅ Resend.send respondió correctamente");
 
     return NextResponse.json({ success: true });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("❌ /api/promociones error:", err);
+    const message = err instanceof Error ? err.message : "Error interno";
     return NextResponse.json(
-      { success: false, message: err.message || "Error interno" },
+      { success: false, message },
       { status: 500 }
     );
   }

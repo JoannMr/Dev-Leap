@@ -1,22 +1,9 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useSearch } from "@/context/SearchContext";
-
-interface Course {
-  id: string;
-  titulo_Curso: string;
-  slug_curso: string;
-  descripcion_curso?: {
-    text?: string;
-    html?: string;
-  };
-  imagenDestacada?: {
-    url: string;
-  };
-  lessons: Array<any>;
-  languages?: Array<any>;
-}
+import { Course } from "@/types/course";
 
 export default function SearchBar() {
   // Usar el contexto de búsqueda
@@ -139,11 +126,13 @@ export default function SearchBar() {
                   >
                     <div className="flex items-start">
                       {course.imagenDestacada && (
-                        <div className="w-12 h-12 mr-3 flex-shrink-0">
-                          <img 
-                            src={course.imagenDestacada.url} 
+                        <div className="w-12 h-12 mr-3 flex-shrink-0 relative">
+                          <Image
+                            src={course.imagenDestacada.url}
                             alt={course.titulo_Curso}
-                            className="w-full h-full object-cover rounded"
+                            width={48}
+                            height={48}
+                            className="object-cover rounded"
                           />
                         </div>
                       )}

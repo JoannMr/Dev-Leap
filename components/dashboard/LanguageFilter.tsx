@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -19,7 +19,6 @@ type LanguageFilterProps = {
 };
 
 export default function LanguageFilter({ languages, activeLanguage }: LanguageFilterProps) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 

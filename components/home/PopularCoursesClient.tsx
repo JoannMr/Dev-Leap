@@ -2,8 +2,9 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { Course } from "@/types/course";
 
-export default function PopularCoursesClient({ courses }: { courses: any[] }) {
+export default function PopularCoursesClient({ courses }: { courses: Course[] }) {
   return (
     <section id="popular-courses" className="py-12 px-4">
       <div className="max-w-5xl mx-auto text-center">
@@ -27,7 +28,7 @@ export default function PopularCoursesClient({ courses }: { courses: any[] }) {
         </motion.p>
 
         <div className="mt-8 grid gap-8 md:grid-cols-3">
-          {courses.map((course: any, index: number) => (
+          {courses.map((course: Course, index: number) => (
             <motion.div
               key={course.id}
               className="bg-white rounded-lg shadow hover:shadow-md transition-shadow"

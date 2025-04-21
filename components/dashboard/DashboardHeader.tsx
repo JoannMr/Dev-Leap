@@ -7,7 +7,7 @@ import SearchBar from "@components/dashboard/SearchBar";
 
 export default function DashboardHeader() {
   return (
-    <header className="bg-white shadow px-8 py-4">
+    <header className="bg-white shadow px-8 py-4 border-b border-gray-200">
       <div className="container mx-auto">
         {/* 
           Layout para móviles (visible en md:hidden)
