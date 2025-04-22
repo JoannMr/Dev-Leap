@@ -7,7 +7,6 @@ import {
   Body,
   Container,
   Section,
-  Img,
   Heading,
   Text,
   Button,
@@ -37,6 +36,7 @@ export default function SubscriptionConfirmation({
           backgroundColor: '#EFF6FF',
         }}
       >
+
         {/* Main content */}
         <Section style={{ padding: '40px 0' }}>
           <Container
@@ -70,39 +70,30 @@ export default function SubscriptionConfirmation({
               Gracias por formar parte de DevLeap. Te mantendremos informado sobre:
             </Text>
 
-            {/* List of notifications */}
             <ul style={{ listStyleType: 'none', padding: 0, marginBottom: 32 }}>
               {notifications.newCourses && (
                 <li style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
-                  <span style={{ fontSize: 18, color: '#10B981', marginRight: 12 }}>
-                    ✔️
-                  </span>
+                  <span style={{ fontSize: 18, color: '#10B981', marginRight: 12 }}>✔️</span>
                   <Text style={{ fontSize: 16, color: '#1F2937' }}>Nuevos cursos</Text>
                 </li>
               )}
               {notifications.updates && (
                 <li style={{ display: 'flex', alignItems: 'center', marginBottom: 12 }}>
-                  <span style={{ fontSize: 18, color: '#10B981', marginRight: 12 }}>
-                    ✔️
-                  </span>
+                  <span style={{ fontSize: 18, color: '#10B981', marginRight: 12 }}>✔️</span>
                   <Text style={{ fontSize: 16, color: '#1F2937' }}>Actualizaciones de contenido</Text>
                 </li>
               )}
               {notifications.events && (
                 <li style={{ display: 'flex', alignItems: 'center' }}>
-                  <span style={{ fontSize: 18, color: '#10B981', marginRight: 12 }}>
-                    ✔️
-                  </span>
+                  <span style={{ fontSize: 18, color: '#10B981', marginRight: 12 }}>✔️</span>
                   <Text style={{ fontSize: 16, color: '#1F2937' }}>Invitaciones a eventos en vivo</Text>
                 </li>
               )}
             </ul>
 
-            {/* Call to action */}
             <Button
-              pX={30}
-              pY={16}
               style={{
+                padding: '16px 30px',
                 backgroundColor: '#3B82F6',
                 backgroundImage: 'linear-gradient(90deg, #3B82F6, #10B981)',
                 color: '#FFFFFF',
@@ -119,7 +110,6 @@ export default function SubscriptionConfirmation({
               Explorar Cursos
             </Button>
 
-            {/* Footer note */}
             <Text
               style={{
                 fontSize: 12,
