@@ -19,12 +19,18 @@ interface CourseDetail extends Course {
 
 export default async function CourseDetailPage({
   params,
+  searchParams,
 }: {
-  params: { slug: string };
+  // Ambos vienen como promesas en Next.js 15
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  // Hacemos la consulta usando el slug
+  // Desempaquetas primero:
+  const { slug } = await params;
+  await searchParams; // aunque no lo uses
+
   const data = await graphQLClient.request<CourseResponse>(GET_COURSE_BY_SLUG, {
-    slug: params.slug,
+    slug,
   });
   
   const course = data.course;

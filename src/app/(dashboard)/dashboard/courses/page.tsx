@@ -14,17 +14,20 @@ interface LanguagesData {
 export default async function CoursesPage({
   searchParams,
 }: {
-  searchParams: { language?: string };
+  // Next.js 15 te pasa los searchParams envueltos en una Promise
+  searchParams: Promise<{ language?: string }>;
 }) {
+  // Desempaqueta antes de usar
+  const { language: activeLanguage } = await searchParams;
+
   const data = await graphQLClient.request<CoursesResponse>(GET_COURSES);
   const langData = await graphQLClient.request<LanguagesData>(GET_LANGUAGES);
 
   const allCourses = data.courses;
   const languages = langData.languages;
-  const activeLanguage = searchParams.language;
   const filteredCourses = activeLanguage
-    ? allCourses.filter((course) =>
-        course.languages?.some((lang) => lang.slugLanguage === activeLanguage)
+    ? allCourses.filter(course =>
+        course.languages?.some(lang => lang.slugLanguage === activeLanguage)
       )
     : allCourses;
 
