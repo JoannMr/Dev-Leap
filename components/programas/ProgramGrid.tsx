@@ -300,7 +300,7 @@ export default function ProgramGrid() {
                         {/* Si está autenticado, redirige al curso específico */}
                         <Link href={programasInfo[prog.nombre].url}>
                           <motion.button
-                            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all"
+                            className="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-2 rounded-lg font-medium hover:from-blue-600 hover:to-green-600 transition-all"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                           >
@@ -313,7 +313,7 @@ export default function ProgramGrid() {
                         {/* Si NO está autenticado, redirige a login */}
                         <Link href="/auth/login">
                           <motion.button
-                            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 transition-all group"
+                            className="w-full bg-gradient-to-r from-blue-500 to-green-500 text-white py-2 rounded-lg font-medium hover:from-blue-600 hover:to-green-600 transition-all group"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                           >

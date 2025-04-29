@@ -20,7 +20,7 @@ const testimonios = [
     rol: "Full Stack Developer",
     empresa: "Globant",
     texto: "La metodología de DevLeap es impresionante. Los proyectos prácticos me dieron la confianza y experiencia que necesitaba para conseguir un mejor empleo.",
-    foto: "/images/cara-testimonio.avif"
+    foto: "/images/cara-testimonio2.webp"
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const testimonios = [
     rol: "UI/UX Designer",
     empresa: "Accenture",
     texto: "Gracias a DevLeap pude combinar mis habilidades de diseño con el desarrollo web. Ahora trabajo en proyectos que realmente me apasionan.",
-    foto: "/images/cara-testimonio.avif"
+    foto: "/images/cara-testimonio3.webp"
   }
 ];
 
@@ -131,7 +131,7 @@ export default function Testimonials() {
                     ))}
                   </div>
                   <p className="text-xl text-gray-700 italic mb-6">
-                    "{testimonios[currentIndex].texto}"
+                    {testimonios[currentIndex].texto}
                   </p>
                   <div>
                     <h3 className="text-xl font-bold text-gray-800">

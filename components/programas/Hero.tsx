@@ -21,6 +21,9 @@ export default function Hero() {
           autoPlay
           muted
           loop
+          playsInline
+          disablePictureInPicture
+          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', minWidth: '100%', minHeight: '100%', width: 'auto', height: 'auto' }}
         >
           <source src="/videos/hero2.mp4" type="video/mp4" />
         </video>
@@ -63,7 +66,7 @@ export default function Hero() {
         >
           <motion.button 
             onClick={scrollToProgramas}
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full text-lg font-semibold hover:shadow-lg hover:from-blue-600 hover:to-green-600 transition-all"
+            className="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-full text-base sm:text-lg font-semibold hover:shadow-lg hover:from-blue-600 hover:to-green-600 transition-all w-full sm:w-auto"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -72,17 +75,17 @@ export default function Hero() {
           
           {/* Botón condicional: si está autenticado va a cursos, si no, a registro */}
           <SignedIn>
-            <Link href="/cursos">
+            <Link href="/cursos" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full text-lg font-semibold hover:bg-white/10 transition-all group"
+                className="px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-white text-white rounded-full text-base sm:text-lg font-semibold hover:bg-white/10 transition-all group w-full"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="inline-flex items-center">
+                <span className="inline-flex items-center justify-center">
                   Ir a mis cursos
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
-                    className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" 
+                    className="h-4 w-4 sm:h-5 sm:w-5 ml-2 transform group-hover:translate-x-1 transition-transform" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor"
@@ -95,17 +98,17 @@ export default function Hero() {
           </SignedIn>
           
           <SignedOut>
-            <Link href="/auth/register">
+            <Link href="/auth/register" className="w-full sm:w-auto">
               <motion.button 
-                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full text-lg font-semibold hover:bg-white/10 transition-all group"
+                className="px-6 py-3 sm:px-8 sm:py-4 bg-transparent border-2 border-white text-white rounded-full text-base sm:text-lg font-semibold hover:bg-white/10 transition-all group w-full"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="inline-flex items-center">
+                <span className="inline-flex items-center justify-center">
                   Comenzar ahora
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
-                    className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" 
+                    className="h-4 w-4 sm:h-5 sm:w-5 ml-2 transform group-hover:translate-x-1 transition-transform" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor"

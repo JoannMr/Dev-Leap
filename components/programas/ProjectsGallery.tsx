@@ -8,28 +8,28 @@ const proyectos = [
   {
     id: 1,
     titulo: "E-commerce App",
-    imagen: "/images/project1.webp",
+    imagen: "/images/proyecto-1.webp",
     categoria: "JavaScript",
     nivel: "Intermedio"
   },
   {
     id: 2,
     titulo: "Admin Dashboard",
-    imagen: "/images/project2.webp",
+    imagen: "/images/proyecto-2.webp",
     categoria: "React & Tailwind",
     nivel: "Avanzado"
   },
   {
     id: 3,
     titulo: "API REST",
-    imagen: "/images/project3.webp",
+    imagen: "/images/proyecto-3.webp",
     categoria: "Node.js",
     nivel: "Intermedio"
   },
   {
     id: 4,
     titulo: "Social Network Clone",
-    imagen: "/images/project4.webp",
+    imagen: "/images/proyecto-4.webp",
     categoria: "Full Stack",
     nivel: "Avanzado"
   }
