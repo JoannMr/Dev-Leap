@@ -65,9 +65,12 @@ export default function HeroMotion() {
         transition={{ delay: 1.2, duration: 1 }}
         className="pt-10"
       >
-        <video className="rounded-xl" autoPlay muted loop>
-          <source src="/videos/hero1.mp4" type="video/mp4" />
-        </video>
+        <div className="relative w-full aspect-video rounded-xl overflow-hidden">
+          <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
+            <source src="/videos/hero1.mp4" type="video/mp4" />
+            Tu navegador no soporta el elemento video.
+          </video>
+        </div>
       </motion.div>
     </motion.section>
   );

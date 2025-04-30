@@ -157,10 +157,11 @@ export default function EmpresasHero() {
               />
               
               <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 shadow-2xl border border-gray-700">
-                <div className="rounded-lg overflow-hidden">
-                <video className="rounded-xl" autoPlay muted loop>
-                  <source src="/videos/empresa.mp4" type="video/mp4" />
-                </video>
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+                  <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
+                    <source src="/videos/empresa.mp4" type="video/mp4" />
+                    Tu navegador no soporta el elemento video.
+                  </video>
                 </div>
 
                 {/* Tarjetas flotantes */}
