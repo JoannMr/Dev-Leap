@@ -2,7 +2,26 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiMail, FiPhone, FiMapPin, FiCheck, FiSend } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiCheck, FiSend, FiAlertCircle } from "react-icons/fi";
+import { toast } from "sonner";
+import { z } from "zod";
+
+// Esquema de validación (debe coincidir con el del backend)
+const formSchema = z.object({
+  nombre: z.string().min(2, "El nombre debe tener al menos 2 caracteres").max(100, "El nombre es demasiado largo"),
+  empresa: z.string().min(2, "El nombre de la empresa debe tener al menos 2 caracteres").max(100, "El nombre de la empresa es demasiado largo"),
+  email: z.string().email("Formato de email inválido"),
+  telefono: z.string().optional().refine(
+    (val) => !val || /^(\+?\d{1,3}[- ]?)?\d{9,15}$/.test(val), 
+    { message: "Formato de teléfono inválido" }
+  ),
+  empleados: z.string().min(1, "Selecciona una opción"),
+  mensaje: z.string().min(10, "El mensaje debe tener al menos 10 caracteres").max(3000, "El mensaje es demasiado largo")
+});
+
+type FormErrors = {
+  [key: string]: string;
+};
 
 export default function ContactoEmpresas() {
   // Estado para el formulario
@@ -15,27 +34,126 @@ export default function ContactoEmpresas() {
     mensaje: ""
   });
 
+  // Estado para errores de validación
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<{[key: string]: boolean}>({});
+
   // Estado para el envío del formulario
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Manejar cambios en el formulario
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
+    
+    // Marcar campo como tocado
+    setTouched(prev => ({ ...prev, [name]: true }));
+    
+    // Validar el campo
+    validateField(name, value);
+  };
+
+  // Validar un campo individual
+  const validateField = (name: string, value: string) => {
+    try {
+      const fieldSchema = formSchema.shape[name as keyof typeof formSchema.shape];
+      fieldSchema.parse(value);
+      
+      // Si no hay errores, eliminar mensaje de error del estado
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        setErrors(prev => ({
+          ...prev,
+          [name]: err.errors[0].message
+        }));
+      }
+    }
+  };
+
+  // Validar formulario completo
+  const validateForm = () => {
+    try {
+      formSchema.parse(formState);
+      setErrors({});
+      return true;
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        const newErrors: FormErrors = {};
+        err.errors.forEach(error => {
+          if (error.path) {
+            newErrors[error.path[0]] = error.message;
+          }
+        });
+        setErrors(newErrors);
+        
+        // Marcar todos los campos como tocados para mostrar todos los errores
+        const allTouched: {[key: string]: boolean} = {};
+        Object.keys(formState).forEach(key => {
+          allTouched[key] = true;
+        });
+        setTouched(allTouched);
+      }
+      return false;
+    }
+  };
+
+  // Mostrar error para un campo específico
+  const showError = (name: string) => {
+    return touched[name] && errors[name];
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     
-    // Simulamos envío a API
-    setTimeout(() => {
+    // Validar formulario antes de enviarlo
+    if (!validateForm()) {
+      toast.error("Por favor, corrige los errores en el formulario");
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setErrorMessage(null);
+    
+    try {
+      console.log("Enviando datos del formulario:", formState);
+      
+      // Añadir un token anti-CSRF (en un entorno real, esto vendría del servidor)
+      const csrfToken = Math.random().toString(36).substring(2);
+      
+      // Envío real a la API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken
+        },
+        body: JSON.stringify(formState),
+      });
+      
+      console.log("Respuesta HTTP:", response.status, response.statusText);
+      const data = await response.json();
+      console.log("Datos de respuesta:", data);
+      
+      if (!response.ok) {
+        const errorMsg = data.error || 'Error al enviar el mensaje';
+        console.error("Error en la API:", errorMsg);
+        throw new Error(errorMsg);
+      }
+      
+      // Mostrar éxito
+      toast.success("¡Formulario enviado con éxito!");
       setIsSubmitting(false);
       setIsSubmitted(true);
       
-      // Reseteamos después de 3 segundos
+      // Resetear el formulario después de 3 segundos
       setTimeout(() => {
         setIsSubmitted(false);
         setFormState({
@@ -46,8 +164,26 @@ export default function ContactoEmpresas() {
           empleados: "",
           mensaje: ""
         });
+        setTouched({});
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      console.error("Error completo:", error);
+      setIsSubmitting(false);
+      const errorMsg = error instanceof Error ? error.message : 'Error al enviar el mensaje';
+      setErrorMessage(errorMsg);
+      toast.error(errorMsg);
+    }
+  };
+
+  // Función para generar clases para un campo según su estado
+  const getInputClasses = (fieldName: string) => {
+    const baseClasses = "w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent";
+    
+    if (showError(fieldName)) {
+      return `${baseClasses} border-red-300 bg-red-50`;
+    }
+    
+    return `${baseClasses} border-gray-300`;
   };
 
   return (
@@ -145,68 +281,114 @@ export default function ContactoEmpresas() {
           >
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {errorMessage && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 mb-4">
+                    <p className="font-medium">Error: {errorMessage}</p>
+                    <p className="text-sm mt-1">Por favor, intenta nuevamente o contáctanos directamente por teléfono.</p>
+                  </div>
+                )}
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="nombre" className="block text-gray-700 font-medium mb-1">Nombre completo</label>
+                    <label htmlFor="nombre" className="block text-gray-700 font-medium mb-1">
+                      Nombre completo <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="text"
                       id="nombre"
                       name="nombre"
                       value={formState.nombre}
                       onChange={handleInputChange}
+                      onBlur={() => setTouched(prev => ({ ...prev, nombre: true }))}
                       required
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={getInputClasses("nombre")}
+                      maxLength={100}
                     />
+                    {showError("nombre") && (
+                      <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <FiAlertCircle className="mr-1" size={14} /> {errors.nombre}
+                      </p>
+                    )}
                   </div>
                   <div>
-                    <label htmlFor="empresa" className="block text-gray-700 font-medium mb-1">Empresa</label>
+                    <label htmlFor="empresa" className="block text-gray-700 font-medium mb-1">
+                      Empresa <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="text"
                       id="empresa"
                       name="empresa"
                       value={formState.empresa}
                       onChange={handleInputChange}
+                      onBlur={() => setTouched(prev => ({ ...prev, empresa: true }))}
                       required
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={getInputClasses("empresa")}
+                      maxLength={100}
                     />
+                    {showError("empresa") && (
+                      <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <FiAlertCircle className="mr-1" size={14} /> {errors.empresa}
+                      </p>
+                    )}
                   </div>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="email" className="block text-gray-700 font-medium mb-1">Email profesional</label>
+                    <label htmlFor="email" className="block text-gray-700 font-medium mb-1">
+                      Email profesional <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
                       value={formState.email}
                       onChange={handleInputChange}
+                      onBlur={() => setTouched(prev => ({ ...prev, email: true }))}
                       required
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className={getInputClasses("email")}
+                      maxLength={100}
                     />
+                    {showError("email") && (
+                      <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <FiAlertCircle className="mr-1" size={14} /> {errors.email}
+                      </p>
+                    )}
                   </div>
                   <div>
-                    <label htmlFor="telefono" className="block text-gray-700 font-medium mb-1">Teléfono</label>
+                    <label htmlFor="telefono" className="block text-gray-700 font-medium mb-1">
+                      Teléfono
+                    </label>
                     <input
                       type="tel"
                       id="telefono"
                       name="telefono"
                       value={formState.telefono}
                       onChange={handleInputChange}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      onBlur={() => setTouched(prev => ({ ...prev, telefono: true }))}
+                      className={getInputClasses("telefono")}
+                      placeholder="+34 600 000 000"
                     />
+                    {showError("telefono") && (
+                      <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <FiAlertCircle className="mr-1" size={14} /> {errors.telefono}
+                      </p>
+                    )}
                   </div>
                 </div>
                 
                 <div>
-                  <label htmlFor="empleados" className="block text-gray-700 font-medium mb-1">Número de empleados</label>
+                  <label htmlFor="empleados" className="block text-gray-700 font-medium mb-1">
+                    Número de empleados <span className="text-red-500">*</span>
+                  </label>
                   <select
                     id="empleados"
                     name="empleados"
                     value={formState.empleados}
                     onChange={handleInputChange}
+                    onBlur={() => setTouched(prev => ({ ...prev, empleados: true }))}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={getInputClasses("empleados")}
                   >
                     <option value="" disabled>Selecciona una opción</option>
                     <option value="1-10">1-10</option>
@@ -215,27 +397,54 @@ export default function ContactoEmpresas() {
                     <option value="201-500">201-500</option>
                     <option value="501+">501+</option>
                   </select>
+                  {showError("empleados") && (
+                    <p className="text-red-500 text-sm mt-1 flex items-center">
+                      <FiAlertCircle className="mr-1" size={14} /> {errors.empleados}
+                    </p>
+                  )}
                 </div>
                 
                 <div>
-                  <label htmlFor="mensaje" className="block text-gray-700 font-medium mb-1">¿Qué tipo de formación necesitas?</label>
+                  <label htmlFor="mensaje" className="block text-gray-700 font-medium mb-1">
+                    ¿Qué tipo de formación necesitas? <span className="text-red-500">*</span>
+                  </label>
                   <textarea
                     id="mensaje"
                     name="mensaje"
                     value={formState.mensaje}
                     onChange={handleInputChange}
+                    onBlur={() => setTouched(prev => ({ ...prev, mensaje: true }))}
                     rows={4}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className={getInputClasses("mensaje")}
+                    maxLength={3000}
                   ></textarea>
+                  {showError("mensaje") && (
+                    <p className="text-red-500 text-sm mt-1 flex items-center">
+                      <FiAlertCircle className="mr-1" size={14} /> {errors.mensaje}
+                    </p>
+                  )}
+                  <div className="text-sm text-gray-500 mt-1 text-right">
+                    {formState.mensaje.length}/3000 caracteres
+                  </div>
+                </div>
+                
+                <div className="text-sm text-gray-600 border-t border-gray-200 pt-4 mt-6">
+                  <p>
+                    <span className="text-red-500">*</span> Campos obligatorios
+                  </p>
+                  <p className="mt-2">
+                    Al enviar este formulario, aceptas nuestra política de privacidad y el tratamiento de tus datos.
+                  </p>
                 </div>
                 
                 <motion.button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 px-6 rounded-lg hover:shadow-lg transition-all flex items-center justify-center"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={isSubmitting}
+                  className={`w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold py-3 px-6 rounded-lg hover:shadow-lg transition-all flex items-center justify-center
+                  ${Object.keys(errors).length > 0 ? 'opacity-70 cursor-not-allowed' : 'hover:opacity-90'}`}
+                  whileHover={Object.keys(errors).length === 0 ? { scale: 1.02 } : {}}
+                  whileTap={Object.keys(errors).length === 0 ? { scale: 0.98 } : {}}
+                  disabled={isSubmitting || Object.keys(errors).length > 0}
                 >
                   {isSubmitting ? (
                     <>

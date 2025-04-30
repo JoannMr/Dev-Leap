@@ -3,7 +3,7 @@
 import { graphQLClient } from "@/lib/graphql-client";
 import { GET_LESSON_BY_SLUG } from "@/lib/queries";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Home, Play } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { Lesson } from "@/types/course";
 
 interface LessonResponse {
