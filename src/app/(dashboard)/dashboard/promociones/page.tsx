@@ -82,8 +82,7 @@ export default function PromocionesPage() {
         }),
       });
       const json = await res.json();
-      console.log("API /api/promociones responded:", res.status, json);
-
+      
       if (!res.ok || !json.success) {
         throw new Error(json.message || "Error al suscribir");
       }
@@ -91,7 +90,6 @@ export default function PromocionesPage() {
       toast.success("¡Te has suscrito correctamente!");
       reset();
     } catch (err: unknown) {
-      console.error("Error al suscribir:", err);
       toast.error(err instanceof Error ? err.message : "Hubo un error al suscribir");
     } finally {
       setIsSubmitting(false);

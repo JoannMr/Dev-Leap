@@ -125,8 +125,7 @@ export default async function LessonDetailPage({
         </div>
       </div>
     );
-  } catch (error) {
-    console.error("Error al cargar la lección:", error);
+  } catch {
     return renderNotFound();
   }
 }

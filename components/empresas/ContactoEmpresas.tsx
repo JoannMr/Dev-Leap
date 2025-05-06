@@ -123,28 +123,20 @@ export default function ContactoEmpresas() {
     setErrorMessage(null);
     
     try {
-      console.log("Enviando datos del formulario:", formState);
-      
-      // Añadir un token anti-CSRF (en un entorno real, esto vendría del servidor)
-      const csrfToken = Math.random().toString(36).substring(2);
-      
       // Envío real a la API
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRF-Token': csrfToken
+          'X-CSRF-Token': 'token-proteccion'
         },
         body: JSON.stringify(formState),
       });
       
-      console.log("Respuesta HTTP:", response.status, response.statusText);
       const data = await response.json();
-      console.log("Datos de respuesta:", data);
       
       if (!response.ok) {
         const errorMsg = data.error || 'Error al enviar el mensaje';
-        console.error("Error en la API:", errorMsg);
         throw new Error(errorMsg);
       }
       
@@ -167,7 +159,6 @@ export default function ContactoEmpresas() {
         setTouched({});
       }, 3000);
     } catch (error) {
-      console.error("Error completo:", error);
       setIsSubmitting(false);
       const errorMsg = error instanceof Error ? error.message : 'Error al enviar el mensaje';
       setErrorMessage(errorMsg);
