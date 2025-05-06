@@ -4,8 +4,9 @@ import { graphQLClient } from "@/lib/graphql-client";
 import { GET_COURSE_BY_SLUG } from "@/lib/queries";
 import Link from "next/link";
 import Image from "next/image";
-import { Course, Language, Lesson } from "@/types/course";
+import { Course, Language } from "@/types/course";
 import CourseTabs from "@components/dashboard/CourseTabs";
+import StartCourseButton from "@components/StartCourseButton";
 
 interface CourseResponse {
   course: CourseDetail;
@@ -21,39 +22,24 @@ export default async function CourseDetailPage({
   params,
   searchParams,
 }: {
-  // Ambos vienen como promesas en Next.js 15
   params: Promise<{ slug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  // Desempaquetas primero:
   const { slug } = await params;
-  await searchParams; // aunque no lo uses
+  await searchParams;
 
   const data = await graphQLClient.request<CourseResponse>(GET_COURSE_BY_SLUG, {
     slug,
   });
-  
+
   const course = data.course;
 
-  // Si no existe el curso, mostramos un mensaje
   if (!course) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="bg-white p-10 rounded-lg shadow-sm text-center max-w-md mx-auto">
-          <div className="w-16 h-16 mx-auto mb-6">
-            <svg className="w-full h-full text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-          </div>
-          <h2 className="text-2xl font-medium bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 text-transparent bg-clip-text mb-3">Curso no encontrado</h2>
-          <p className="text-gray-500 mb-8">No pudimos encontrar el curso que estás buscando.</p>
-          <Link
-            href="/dashboard/courses"
-            className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition-colors"
-          >
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
+          <h2 className="text-2xl font-medium text-red-600 mb-3">Curso no encontrado</h2>
+          <Link href="/dashboard/courses" className="text-blue-600 underline">
             Volver a cursos
           </Link>
         </div>
@@ -79,7 +65,7 @@ export default async function CourseDetailPage({
           </Link>
         </div>
       </div>
-      
+
       {/* Banner del curso */}
       <header className="relative bg-gradient-to-r from-blue-50 to-green-50 pt-16 pb-20 px-4">
         <div className="max-w-7xl mx-auto">
@@ -92,11 +78,11 @@ export default async function CourseDetailPage({
                   className="px-3 py-1 rounded-md bg-white text-blue-600 text-xs font-medium flex items-center shadow-sm"
                 >
                   {lang.icono && (
-                    <Image 
-                      src={lang.icono.url} 
-                      alt={lang.name} 
-                      width={16} 
-                      height={16} 
+                    <Image
+                      src={lang.icono.url}
+                      alt={lang.name}
+                      width={16}
+                      height={16}
                       className="mr-2"
                     />
                   )}
@@ -104,12 +90,12 @@ export default async function CourseDetailPage({
                 </span>
               ))}
             </div>
-            
+
             {/* Título del curso */}
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 text-transparent bg-clip-text mb-6">
               {course.titulo_Curso}
             </h1>
-            
+
             {/* Meta información */}
             <div className="flex flex-wrap gap-6 text-gray-500 text-sm mb-8">
               <div className="flex items-center">
@@ -131,7 +117,7 @@ export default async function CourseDetailPage({
                 Acceso ilimitado
               </div>
             </div>
-            
+
             {/* Imagen destacada si existe */}
             {course.imagenDestacada && (
               <div className="mt-6 rounded-xl overflow-hidden relative h-[400px] shadow-lg">
@@ -154,112 +140,28 @@ export default async function CourseDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Columna principal - Descripción e info */}
           <div className="lg:col-span-2">
-            {/* Aquí usamos el componente de pestañas */}
-            <CourseTabs 
-              courseDescription={course.descripcion_curso.html}
-            />
+            <CourseTabs courseDescription={course.descripcion_curso.html} />
           </div>
-          
-          {/* Columna lateral - Lecciones y CTA */}
+
+          {/* Columna lateral - CTA */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              {/* Tarjeta de inscripción */}
-              <div className="border border-blue-100 rounded-lg overflow-hidden shadow-sm mb-6">
-                <div className="px-6 py-5 bg-gradient-to-r from-blue-50 to-green-50 border-b border-blue-100">
-                  <h3 className="font-medium text-blue-800">Inscríbete ahora</h3>
-                </div>
-                <div className="p-6 bg-white">
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-center text-sm text-gray-700">
-                      <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {totalLessons} lecciones completas
-                    </li>
-                    <li className="flex items-center text-sm text-gray-700">
-                      <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      Acceso ilimitado
-                    </li>
-                    <li className="flex items-center text-sm text-gray-700">
-                      <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      Proyectos descargables
-                    </li>
-                    <li className="flex items-center text-sm text-gray-700">
-                      <svg className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      Certificado de finalización
-                    </li>
-                  </ul>
-                  
-                  <Link 
-                    href={course.lessons && course.lessons.length > 0 ? 
-                      `/dashboard/courses/${course.slug_curso}/lessons/${course.lessons[0]?.slug || ''}` :
-                      "#"
-                    }
-                    className={`block w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-md text-center transition-colors hover:bg-blue-700 ${!course.lessons || course.lessons.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  >
-                    Comenzar curso
-                  </Link>
-                </div>
-              </div>
-              
-              {/* Contenido del curso */}
-              <div className="border border-blue-100 rounded-lg overflow-hidden shadow-sm">
-                <div className="px-6 py-5 bg-gradient-to-r from-blue-50 to-green-50 border-b border-blue-100 flex justify-between items-center">
-                  <h3 className="font-medium text-blue-800">Contenido del curso</h3>
-                  <span className="text-sm text-blue-600">{totalLessons} lecciones</span>
-                </div>
-                <div className="max-h-[50vh] overflow-y-auto bg-white">
-                  <ul className="divide-y divide-blue-100">
-                    {course.lessons && course.lessons.map((lesson: Lesson, idx: number) => (
-                      <li key={lesson.id}>
-                        <Link
-                          href={`/dashboard/courses/${course.slug_curso}/lessons/${lesson.slug}`}
-                          className="block px-6 py-4 hover:bg-blue-50 transition-colors"
-                        >
-                          <div className="flex items-start">
-                            <span className="inline-flex items-center justify-center h-6 w-6 rounded-full bg-gradient-to-r from-blue-500 to-green-500 text-white text-xs font-medium mr-3 mt-0.5">
-                              {idx + 1}
-                            </span>
-                            <div>
-                              <h4 className="text-sm font-medium text-gray-900 leading-5">
-                                {lesson.titulo}
-                              </h4>
-                              <p className="text-xs text-blue-600 mt-1">Lección {idx + 1}</p>
-                            </div>
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            <div className="sticky top-24 border border-blue-100 rounded-lg shadow-sm p-6">
+              <h3 className="text-blue-800 font-semibold mb-4">Inscríbete ahora</h3>
+              <ul className="space-y-2 text-sm text-gray-700 mb-6">
+                <li>{totalLessons} lecciones completas</li>
+                <li>Acceso ilimitado</li>
+                <li>Proyectos descargables</li>
+                <li>Certificado de finalización</li>
+              </ul>
+              <StartCourseButton
+                courseId={course.id}
+                slugCurso={course.slug_curso}
+                lessons={course.lessons}
+              />
             </div>
           </div>
         </div>
       </main>
-      
-      {/* Footer CTA */}
-      <div className="bg-gradient-to-r from-blue-500 to-green-500 py-16">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-semibold text-white mb-4">¿Listo para comenzar tu aprendizaje?</h2>
-          <p className="text-white/80 mb-8 max-w-lg mx-auto">Únete a miles de estudiantes que están transformando sus carreras con nuestros cursos de calidad.</p>
-          <Link 
-            href={course.lessons && course.lessons.length > 0 ? 
-              `/dashboard/courses/${course.slug_curso}/lessons/${course.lessons[0]?.slug || ''}` :
-              "#"
-            }
-            className={`inline-block py-3 px-8 bg-white text-blue-600 font-medium rounded-md hover:bg-gray-100 transition-colors ${!course.lessons || course.lessons.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
-          >
-            Comenzar ahora
-          </Link>
-        </div>
-      </div>
     </div>
   );
 }
