@@ -1,25 +1,27 @@
-# DevLeap - Plataforma de Cursos Online
+# 🚀 DevLeap - Plataforma de Cursos Online 🎓
 
 DevLeap es una plataforma de cursos online especializada en tecnologías de desarrollo web, programación, diseño UX/UI y marketing digital. La plataforma permite a los usuarios explorar cursos, inscribirse y acceder a lecciones estructuradas con contenido multimedia.
+
+**🌐 [Visita la plataforma en vivo](https://dev-leap.vercel.app/)**
 
 ![DevLeap Home Page](/public/images/mockup-mac.png)
 
 ![Curso en Tablet](/public/images/mockup-tablet.png)
 
-## Funcionalidades
+## ✨ Funcionalidades
 
-- **Autenticación de Usuarios**: Integración con Clerk para manejo seguro de usuarios.
-- **Catálogo de Cursos**: Exploración de cursos disponibles con filtros.
-- **Detalles de Cursos**: Páginas detalladas con descripción, lecciones e información del instructor.
-- **Sistema de Inscripción**: Los usuarios pueden inscribirse a cursos y acceder al contenido.
-- **Visualización de Lecciones**: Interfaz intuitiva para consumir el contenido de las lecciones.
-- **Seguimiento de Progreso**: Indicadores visuales del avance en los cursos.
-- **Área Personal**: Sección "Mis Cursos" para gestionar inscripciones.
-- **Promociones**: Sistema para mostrar ofertas y descuentos en cursos.
+- 🔒 **Autenticación de Usuarios**: Integración con Clerk para manejo seguro de usuarios.
+- 📚 **Catálogo de Cursos**: Exploración de cursos disponibles con filtros.
+- 📖 **Detalles de Cursos**: Páginas detalladas con descripción, lecciones e información del instructor.
+- 📝 **Sistema de Inscripción**: Los usuarios pueden inscribirse a cursos y acceder al contenido.
+- 🎥 **Visualización de Lecciones**: Interfaz intuitiva para consumir el contenido de las lecciones.
+- 📈 **Seguimiento de Progreso**: Indicadores visuales del avance en los cursos.
+- 👤 **Área Personal**: Sección "Mis Cursos" para gestionar inscripciones.
+- 💸 **Promociones**: Sistema para mostrar ofertas y descuentos en cursos.
 
-## Arquitectura del Sistema
+## 🏗️ Arquitectura del Sistema
 
-### Arquitectura General
+### 📐 Arquitectura General
 
 DevLeap sigue una arquitectura moderna basada en:
 
@@ -51,9 +53,9 @@ DevLeap sigue una arquitectura moderna basada en:
 └────────────────┘          └──────────────┘
 ```
 
-### Diagramas
+### 📊 Diagramas
 
-#### Diagrama de Clases (UML)
+#### 🏷️ Diagrama de Clases (UML)
 
 ```
 ┌───────────────┐      ┌───────────────┐
@@ -86,7 +88,7 @@ DevLeap sigue una arquitectura moderna basada en:
 └───────────────┘
 ```
 
-#### Diagrama ER (Base de Datos)
+#### 📁 Diagrama ER (Base de Datos)
 
 ```
 ┌───────────────┐       ┌───────────────┐
@@ -132,9 +134,9 @@ DevLeap sigue una arquitectura moderna basada en:
 └───────────────┘
 ```
 
-## Detalles de Implementación
+## 🔍 Detalles de Implementación
 
-### Estructura de Directorios
+### 📂 Estructura de Directorios
 
 ```
 src/
@@ -228,51 +230,51 @@ components/
     └── Toaster.tsx                       # Componente de notificaciones
 ```
 
-### Componentes Clave
+### 🧩 Componentes Clave
 
 - **CourseCard**: Tarjeta visual para mostrar cursos en el catálogo.
 - **CourseTabs**: Componente de pestañas para mostrar diferentes secciones de información del curso.
 - **StartCourseButton**: Gestiona la inscripción y acceso a los cursos.
 
-### Patrones de Diseño
+### 🔄 Patrones de Diseño
 
 - **Page Pattern**: Cada ruta tiene su propio componente Page que maneja la lógica y renderizado.
 - **Container/Presentational Pattern**: Separación entre componentes de UI y lógica.
 - **Serverless Functions**: APIs implementadas como funciones serverless.
 - **Data Fetching Pattern**: Consultas GraphQL para obtención de datos.
 
-## Dependencias Principales
+## 📦 Dependencias Principales
 
 ```json
 {
   "dependencies": {
-    "@clerk/nextjs": "^6.14.2",    // Autenticación y gestión de usuarios
+    "@clerk/nextjs": "^6.14.2",    // 🔑 Autenticación y gestión de usuarios
     "@hookform/resolvers": "^5.0.1", // Integración de validadores con React Hook Form
-    "@react-email/components": "^0.0.36", // Componentes para emails
+    "@react-email/components": "^0.0.36", // 📧 Componentes para emails
     "clsx": "^2.1.1",              // Utilidad para combinar clases condicionales
-    "framer-motion": "^12.7.3",    // Biblioteca de animaciones avanzadas
-    "graphql-request": "^7.1.2",   // Cliente GraphQL para consultas
-    "lucide-react": "^0.484.0",    // Iconos modernos para la UI
-    "next": "15.2.4",              // Framework principal
-    "react": "^19.0.0",            // Biblioteca base
+    "framer-motion": "^12.7.3",    // 🎞️ Biblioteca de animaciones avanzadas
+    "graphql-request": "^7.1.2",   // 📡 Cliente GraphQL para consultas
+    "lucide-react": "^0.484.0",    // 🎨 Iconos modernos para la UI
+    "next": "15.2.4",              // 🚀 Framework principal
+    "react": "^19.0.0",            // ⚛️ Biblioteca base
     "react-dom": "^19.0.0",        // Renderizado de componentes
-    "react-hook-form": "^7.55.0",  // Gestión de formularios
-    "react-icons": "^5.5.0",       // Biblioteca adicional de iconos
-    "resend": "^4.4.0",            // Envío de emails
-    "sonner": "^2.0.3",            // Notificaciones toast
+    "react-hook-form": "^7.55.0",  // 🛠️ Gestión de formularios
+    "react-icons": "^5.5.0",       // 🎨 Biblioteca adicional de iconos
+    "resend": "^4.4.0",            // 📧 Envío de emails
+    "sonner": "^2.0.3",            // 🔔 Notificaciones toast
     "tailwind-merge": "^3.0.2",    // Utilidad para Tailwind
-    "zod": "^3.24.2"               // Validación de datos
+    "zod": "^3.24.2"               // ✅ Validación de datos
   },
   "devDependencies": {
     "eslint": "^9",                // Linting de código
-    "tailwindcss": "^4.0.17",      // Framework CSS utility-first
+    "tailwindcss": "^4.0.17",      // 🎨 Framework CSS utility-first
     "typescript": "^5",            // Lenguaje tipado basado en JavaScript
-    "react-email": "^4.0.7"        // Herramientas de desarrollo para emails
+    "react-email": "^4.0.7"        // 📧 Herramientas de desarrollo para emails
   }
 }
 ```
 
-## Endpoints de API
+## 🔗 Endpoints de API
 
 | Endpoint | Método | Descripción | Parámetros |
 |----------|--------|-------------|------------|
@@ -281,7 +283,7 @@ components/
 | `/api/mis-cursos` | GET | Obtiene los cursos en los que el usuario está inscrito | Auth header |
 | `/api/send-email` | POST | Envía emails de confirmación | `{ email, name, courseTitle }` |
 
-## Modelos de Datos
+## 📜 Modelos de Datos
 
 ### Course
 ```typescript
@@ -348,7 +350,7 @@ interface Inscripcion {
 }
 ```
 
-## Consultas GraphQL
+## 🔄 Consultas GraphQL
 
 El sistema utiliza consultas GraphQL para comunicarse con el CMS Hygraph. Algunas consultas principales:
 
@@ -359,7 +361,7 @@ El sistema utiliza consultas GraphQL para comunicarse con el CMS Hygraph. Alguna
 - **CREATE_INSCRIPCION**: Crea una nueva inscripción de usuario en un curso.
 - **GET_ALL_INSCRIPCIONES**: Obtiene todas las inscripciones de usuarios.
 
-## Configuración del Proyecto
+## ⚙️ Configuración del Proyecto
 
 1. **Requisitos previos**:
    - Node.js 18+ y npm/yarn
@@ -386,10 +388,14 @@ npm install
 npm run dev
 ```
 
-## Contacto y Soporte
+## 📞 Contacto y Soporte
 
 Para más información o soporte, contactar a través de:
-- Email: soporte@devleap.com
-- GitHub: [Dev-Leap](https://github.com/Dev-Leap)
+- 🔗 GitHub: [Dev-Leap](https://github.com/Dev-Leap)
+- 🌐 Web: [dev-leap.vercel.app](https://dev-leap.vercel.app/)
 
-© 2024 DevLeap - Todos los derechos reservados 
+### 👨‍💻 Desarrollado por:
+- **Joan Merino** 
+- **Dylan Fiallos** 
+
+© 2024 DevLeap 🌟 - Todos los derechos reservados 
