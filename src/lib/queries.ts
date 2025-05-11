@@ -87,6 +87,12 @@ export const GET_LESSON_BY_SLUG = gql`
           id
           titulo
           slug
+          content {
+            html
+          }
+          videoUrl {
+            url
+          }
         }
       }
     }

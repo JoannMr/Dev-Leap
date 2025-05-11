@@ -1,12 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { BookOpen, Info } from 'lucide-react';
+import { Lesson } from '@/types/course';
 
 interface CourseTabsProps {
   courseDescription: string;
+  lessons?: Lesson[];
+  courseSlug?: string;
+  courseId?: string;
 }
 
-export default function CourseTabs({ courseDescription }: CourseTabsProps) {
+export default function CourseTabs({ courseDescription, lessons = [] }: CourseTabsProps) {
   const [activeTab, setActiveTab] = useState<'acerca' | 'instructor' | 'opiniones'>('acerca');
 
   return (
@@ -57,6 +62,41 @@ export default function CourseTabs({ courseDescription }: CourseTabsProps) {
               className="prose prose-blue max-w-none mb-10"
               dangerouslySetInnerHTML={{ __html: courseDescription }}
             />
+
+            {/* Lista de lecciones */}
+            {lessons && lessons.length > 0 && (
+              <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 mb-10 border border-blue-100">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-blue-800">Lecciones del curso</h3>
+                  <div className="bg-blue-50 p-2 rounded-lg text-blue-700 flex items-center text-sm">
+                    <Info className="w-4 h-4 mr-2" />
+                    <span>Para acceder a las lecciones, inscríbete en el curso</span>
+                  </div>
+                </div>
+                
+                <ul className="space-y-3">
+                  {lessons.map((lesson, idx) => (
+                    <li key={lesson.id} className="flex items-center p-4 bg-white rounded-lg border border-blue-100 hover:shadow-md transition-shadow">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-medium mr-3">
+                        {idx + 1}
+                      </span>
+                      <div>
+                        <span className="font-medium text-gray-800 block">{lesson.titulo}</span>
+                        <span className="text-sm text-gray-500 flex items-center mt-1">
+                          <BookOpen className="w-4 h-4 mr-1" /> Lección {idx + 1}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                
+                <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <p className="text-sm text-yellow-700">
+                    Para acceder a todas las lecciones y material del curso, por favor inscríbete utilizando el botón &ldquo;Comenzar curso&rdquo; que se encuentra en la barra lateral.
+                  </p>
+                </div>
+              </div>
+            )}
 
             {/* Lo que aprenderás */}
             <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 mb-10 border border-blue-100">

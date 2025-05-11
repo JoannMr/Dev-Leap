@@ -140,7 +140,12 @@ export default async function CourseDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Columna principal - Descripción e info */}
           <div className="lg:col-span-2">
-            <CourseTabs courseDescription={course.descripcion_curso.html} />
+            <CourseTabs 
+              courseDescription={course.descripcion_curso.html} 
+              lessons={course.lessons} 
+              courseSlug={course.slug_curso}
+              courseId={course.id}
+            />
           </div>
 
           {/* Columna lateral - CTA */}
