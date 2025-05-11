@@ -1,8 +1,8 @@
 # DevLeap - Plataforma de Cursos Online
 
-![DevLeap Home Page](/public/images/mockup-mac.png)
-
 DevLeap es una plataforma de cursos online especializada en tecnologías de desarrollo web, programación, diseño UX/UI y marketing digital. La plataforma permite a los usuarios explorar cursos, inscribirse y acceder a lecciones estructuradas con contenido multimedia.
+
+![DevLeap Home Page](/public/images/mockup-mac.png)
 
 ![Curso en Tablet](/public/images/mockup-tablet.png)
 
