@@ -194,6 +194,40 @@ src/
     └── course.ts                            # Tipos para cursos y lecciones
 ```
 
+```
+components/
+├── Footer.tsx                            # Pie de página global
+├── Header.tsx                            # Cabecera global
+├── StartCourseButton.tsx                 # Botón para inscripción a cursos
+├── dashboard/
+│   ├── CourseCard.tsx                    # Tarjeta para mostrar curso
+│   ├── CourseFilters.tsx                 # Filtros para catálogo de cursos
+│   ├── CourseHero.tsx                    # Hero para página de curso
+│   ├── CourseTabs.tsx                    # Pestañas en detalle de curso
+│   └── ...
+├── empresas/
+│   ├── ContactoEmpresas.tsx              # Formulario contacto empresas
+│   ├── EmpresasHero.tsx                  # Hero sección empresas
+│   ├── SolucionesGrid.tsx                # Grid de soluciones para empresas
+│   └── ...
+├── faqs/
+│   ├── AccordionFaqs.tsx                 # Acordeón de preguntas
+│   ├── CategoriesSection.tsx             # Categorías de preguntas
+│   └── FaqsHero.tsx                      # Hero de FAQs
+├── home/
+│   ├── CommunityMotion.tsx               # Animación comunidad (landing)
+│   ├── HeroMotion.tsx                    # Animación hero (landing)
+│   ├── PopularCoursesClient.tsx          # Cursos populares (cliente)
+│   └── ...
+├── programas/
+│   ├── Benefits.tsx                      # Beneficios de programas
+│   ├── Hero.tsx                          # Hero de programas
+│   ├── ProgramGrid.tsx                   # Grid de programas
+│   └── ...
+└── ui/
+    └── Toaster.tsx                       # Componente de notificaciones
+```
+
 ### Componentes Clave
 
 - **CourseCard**: Tarjeta visual para mostrar cursos en el catálogo.
@@ -348,9 +382,9 @@ El sistema utiliza consultas GraphQL para comunicarse con el CMS Hygraph. Alguna
 
 3. **Instalación y ejecución**:
 ```bash
-   npm install
+npm install
 npm run dev
-   ```
+```
 
 ## Contacto y Soporte
 
@@ -358,46 +392,4 @@ Para más información o soporte, contactar a través de:
 - Email: soporte@devleap.com
 - GitHub: [Dev-Leap](https://github.com/Dev-Leap)
 
-© 2024 DevLeap - Todos los derechos reservados
-
-```
-components/
-├── Footer.tsx                            # Pie de página global
-├── Header.tsx                            # Cabecera global
-├── StartCourseButton.tsx                 # Botón para inscripción a cursos
-├── dashboard/
-│   ├── CourseCard.tsx                    # Tarjeta para mostrar curso
-│   ├── CourseFilters.tsx                 # Filtros para catálogo de cursos
-│   ├── CourseHero.tsx                    # Hero para página de curso
-│   ├── CourseTabs.tsx                    # Pestañas en detalle de curso
-│   └── ...
-├── empresas/
-│   ├── ContactoEmpresas.tsx              # Formulario contacto empresas
-│   ├── EmpresasHero.tsx                  # Hero sección empresas
-│   ├── SolucionesGrid.tsx                # Grid de soluciones para empresas
-│   └── ...
-├── faqs/
-│   ├── AccordionFaqs.tsx                 # Acordeón de preguntas
-│   ├── CategoriesSection.tsx             # Categorías de preguntas
-│   └── FaqsHero.tsx                      # Hero de FAQs
-├── home/
-│   ├── CommunityMotion.tsx               # Animación comunidad (landing)
-│   ├── HeroMotion.tsx                    # Animación hero (landing)
-│   ├── PopularCoursesClient.tsx          # Cursos populares (cliente)
-│   └── ...
-├── programas/
-│   ├── Benefits.tsx                      # Beneficios de programas
-│   ├── Hero.tsx                          # Hero de programas
-│   ├── ProgramGrid.tsx                   # Grid de programas
-│   └── ...
-└── ui/
-    └── Toaster.tsx                       # Componente de notificaciones
-```
-
-```
-public/                                   # Archivos públicos
-├── logo.svg                              # Logo de DevLeap
-├── image1.jpg                            # Imagen de curso en tablet
-├── image2.jpg                            # Imagen de la home
-└── ...
-```
+© 2024 DevLeap - Todos los derechos reservados 
